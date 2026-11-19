@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/*
+ * CentricLabs design tokens — Tailwind v4 theme.
+ * All styling in the app uses these tokens (bg-paper, text-ink,
+ * bg-flame, bg-amber, border-line, ...) — no ad-hoc hex colours in
+ * components, and no deep teal anywhere. Warm paper, ink black,
+ * vivid orange accent, amber secondary.
+ */
+@theme {
+  --color-paper: #faf6ef;
+  --color-cream: #fffdf8;
+  --color-ink: #161513;
+  --color-ink-soft: #5b554d;
+  --color-flame: #ff5a1f;
+  --color-flame-dark: #e04a12;
+  --color-amber: #ffb627;
+  --color-amber-soft: #ffe9b8;
+  --color-line: #e8dfd2;
+  --color-sage: #eef0e6;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}

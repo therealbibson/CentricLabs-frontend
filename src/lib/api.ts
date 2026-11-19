@@ -47,11 +47,23 @@ export function fetchProducts(): Promise<Product[]> {
   return getJson<Product[]>("/api/products", FALLBACK_PRODUCTS);
 }
 
-export function fetchProduct(id: string): Promise<Product | undefined> {
-  return getJson<Product | undefined>(
-    `/api/products/${id}`,
-    FALLBACK_PRODUCTS.find((p) => p.id === id),
-  );
+export async function fetchProduct(
+  id: string,
+): Promise<Product | undefined> {
+  try {
+    const res = await fetch(`${API_URL}/api/products/${id}`, {
+      cache: "no-store",
+    });
+    // A 404 means the product was removed from the catalogue — do NOT
+    // fall back to the embedded copy, or a deleted product would still
+    // show (and sell) on its detail page.
+    if (res.status === 404) return undefined;
+    if (!res.ok) throw new Error(`API ${res.status}`);
+    return (await res.json()) as Product;
+  } catch {
+    // Backend unreachable — render from the embedded sample catalogue.
+    return FALLBACK_PRODUCTS.find((p) => p.id === id);
+  }
 }
 
 export function fetchCategories(): Promise<string[]> {

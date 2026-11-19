@@ -132,23 +132,23 @@ export default function AdminProductsPage() {
  }
 
  const inputCls =
- "w-full border-2 border-ink bg-base px-4 py-2.5 text-sm outline-none focus:border-signal";
+ "w-full rounded-lg border border-line bg-surface px-4 py-2.5 text-sm outline-none focus:border-ink focus:ring-2 focus:ring-ink/10";
 
  return (
  <AdminShell title="Products">
  {error && (
- <p className="mb-4 border-2 border-ink bg-surface p-4 font-bold text-signal">
+ <p className="mb-4 rounded-xl bg-red-50 p-4 font-semibold text-red-700">
  {error}
  </p>
  )}
  {notice && (
- <p className="mb-4 bg-base p-4 font-bold">{notice}</p>
+ <p className="mb-4 rounded-xl bg-mist p-4 font-semibold">{notice}</p>
  )}
 
  <button
  type="button"
  onClick={startAdd}
- className="bg-signal px-5 py-2.5 text-sm font-bold text-white hover:bg-signal-deep"
+ className="rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ink/90"
  >
  + Add product
  </button>
@@ -157,16 +157,16 @@ export default function AdminProductsPage() {
  <form
  id="product-form"
  onSubmit={submit}
- className="mt-6 grid gap-4 border-2 border-ink bg-surface p-6 sm:grid-cols-2"
+ className="mt-6 grid gap-4 rounded-2xl border border-line bg-surface p-6 shadow-sm sm:grid-cols-2"
  >
- <h2 className="text-lg font-black sm:col-span-2">
+ <h2 className="text-lg font-extrabold sm:col-span-2">
  {editingId ? "Edit product" : "Add a new product"}
  </h2>
- <label className="text-sm font-bold">
+ <label className="text-sm font-semibold">
  Name
  <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={`${inputCls} mt-1`} required placeholder="e.g. iPhone 14 · 128GB" />
  </label>
- <label className="text-sm font-bold">
+ <label className="text-sm font-semibold">
  Category
  <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className={`${inputCls} mt-1`} required list="admin-categories" placeholder="e.g. Phones" />
  <datalist id="admin-categories">
@@ -175,36 +175,36 @@ export default function AdminProductsPage() {
  ))}
  </datalist>
  </label>
- <label className="text-sm font-bold">
+ <label className="text-sm font-semibold">
  Price (₦)
  <input type="number" min={0} value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className={`${inputCls} mt-1`} required />
  </label>
- <label className="text-sm font-bold">
+ <label className="text-sm font-semibold">
  Old price (₦, optional — for sales)
  <input type="number" min={0} value={form.oldPrice} onChange={(e) => setForm({ ...form, oldPrice: e.target.value })} className={`${inputCls} mt-1`} />
  </label>
- <label className="text-sm font-bold">
+ <label className="text-sm font-semibold">
  Stock
  <input type="number" min={0} value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} className={`${inputCls} mt-1`} required />
  </label>
- <label className="text-sm font-bold">
+ <label className="text-sm font-semibold">
  Badge (optional)
  <input value={form.badge} onChange={(e) => setForm({ ...form, badge: e.target.value })} className={`${inputCls} mt-1`} placeholder="e.g. Best Seller, New" />
  </label>
- <label className="text-sm font-bold sm:col-span-2">
+ <label className="text-sm font-semibold sm:col-span-2">
  Image URL
  <input value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} className={`${inputCls} mt-1`} required placeholder="https://images.unsplash.com/… or /products/phone.jpg" />
  </label>
- <label className="text-sm font-bold sm:col-span-2">
+ <label className="text-sm font-semibold sm:col-span-2">
  Description
  <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className={`${inputCls} mt-1 min-h-20`} required />
  </label>
  <div className="flex gap-3 sm:col-span-2">
- <button type="submit" disabled={saving} className="bg-signal px-6 py-2.5 font-bold text-white hover:bg-signal-deep disabled:opacity-50">
+ <button type="submit" disabled={saving} className="rounded-lg bg-ink px-6 py-2.5 font-semibold text-white transition hover:bg-ink/90 disabled:opacity-50">
  {saving ? "Saving…" : editingId ? "Save changes" : "Add product"}
  </button>
  {editingId && (
- <button type="button" onClick={() => { setEditingId(null); setForm(EMPTY_FORM); }} className="border-2 border-ink bg-base px-6 py-2.5 font-bold">
+ <button type="button" onClick={() => { setEditingId(null); setForm(EMPTY_FORM); }} className="rounded-lg border border-line bg-surface px-6 py-2.5 font-semibold hover:border-ink">
  Cancel edit
  </button>
  )}
@@ -213,23 +213,23 @@ export default function AdminProductsPage() {
 
  {/* List */}
  {loading ? (
- <p className="mt-6 text-steel">Loading products…</p>
+ <p className="mt-6 text-slate">Loading products…</p>
  ) : (
- <div className="mt-6 overflow-x-auto border-2 border-ink bg-surface">
+ <div className="mt-6 overflow-x-auto rounded-2xl border border-line bg-surface shadow-sm">
  <table className="w-full min-w-[720px] text-left text-sm">
  <thead>
- <tr className="border-b border-line font-mono text-xs text-steel">
- <th className="px-4 py-3">Product</th>
- <th className="px-4 py-3">Category</th>
- <th className="px-4 py-3">Price</th>
- <th className="px-4 py-3">Stock</th>
- <th className="px-4 py-3">Actions</th>
+ <tr className="border-b border-line bg-mist text-xs text-slate">
+ <th className="px-4 py-3 font-semibold">Product</th>
+ <th className="px-4 py-3 font-semibold">Category</th>
+ <th className="px-4 py-3 font-semibold">Price</th>
+ <th className="px-4 py-3 font-semibold">Stock</th>
+ <th className="px-4 py-3 font-semibold">Actions</th>
  </tr>
  </thead>
  <tbody>
  {products.map((p) => (
  <tr key={p.id} className="border-b border-line last:border-0">
- <td className="px-4 py-3 font-bold">{p.name}</td>
+ <td className="px-4 py-3 font-semibold">{p.name}</td>
  <td className="px-4 py-3">{p.category}</td>
  <td className="px-4 py-3">
  <input
@@ -240,10 +240,10 @@ export default function AdminProductsPage() {
  const v = Number(e.target.value);
  if (v !== p.price) void quickSave(p, { price: v });
  }}
- className="w-28 border-2 border-ink bg-base px-2 py-1 outline-none focus:border-signal"
+ className="w-28 rounded-lg border border-line bg-surface px-2 py-1 outline-none focus:border-ink focus:ring-2 focus:ring-ink/10"
  aria-label={`Price for ${p.name}`}
  />
- <span className="ml-1 text-xs text-steel">
+ <span className="ml-1 text-xs text-slate">
  {p.oldPrice ? `was ${formatNGN(p.oldPrice)}` : ""}
  </span>
  </td>
@@ -256,18 +256,18 @@ export default function AdminProductsPage() {
  const v = Number(e.target.value);
  if (v !== p.stock) void quickSave(p, { stock: v });
  }}
- className={`w-20 border-2 px-2 py-1 outline-none focus:border-signal ${
- p.stock <= 5 ? "border-signal bg-base font-black" : "border-ink bg-base"
+ className={`w-20 rounded-lg border px-2 py-1 outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 ${
+ p.stock <= 5 ? "border-copper bg-surface font-extrabold" : "border-line bg-surface"
  }`}
  aria-label={`Stock for ${p.name}`}
  />
  </td>
  <td className="px-4 py-3">
  <div className="flex gap-3">
- <button type="button" onClick={() => startEdit(p)} className="font-bold text-signal hover:underline">
+ <button type="button" onClick={() => startEdit(p)} className="font-semibold text-ink hover:underline">
  Edit
  </button>
- <button type="button" onClick={() => void remove(p.id, p.name)} className="font-bold text-steel hover:text-signal hover:underline">
+ <button type="button" onClick={() => void remove(p.id, p.name)} className="font-semibold text-slate hover:text-ink hover:underline">
  Delete
  </button>
  </div>
@@ -278,7 +278,7 @@ export default function AdminProductsPage() {
  </table>
  </div>
  )}
- <p className="mt-3 text-xs text-steel">
+ <p className="mt-3 text-xs text-slate">
  Tip: change a price or stock number in the table and click away — it
  saves automatically.
  </p>

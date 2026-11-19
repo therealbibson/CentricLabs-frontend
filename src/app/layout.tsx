@@ -5,13 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 
-// Type pairing — professional fonts for a business store (owner's brief,
-// which overrules the frontend-design skill's usual avoidance of Inter
-// as a generic default): Manrope is the display face — a clean, modern
-// business grotesque for headlines and the wordmark. Inter is the body
-// face — the professional business standard, chosen deliberately for
-// readability and trust. IBM Plex Mono carries prices, stock and spec
-// data — tabular figures that must line up.
+// Type pairing — professional fonts for a business store (owner's brief):
+// Manrope is the display face for headlines and prices; Inter is the body
+// face. IBM Plex Mono is kept only for reference codes (order and quote
+// references), where fixed-width figures are functional — prices now use
+// Manrope, not mono, so the store reads like a shop, not a spec sheet.
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
@@ -47,7 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${manrope.variable} ${inter.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-base font-sans text-ink">
+      <body className="flex min-h-full flex-col bg-mist font-sans text-ink">
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>

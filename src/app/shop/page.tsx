@@ -38,15 +38,15 @@ function ShopContent() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="font-display text-4xl font-black tracking-tight sm:text-5xl">
+      <h1 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
         Shop
       </h1>
-      <p className="mt-2 max-w-2xl text-steel">
+      <p className="mt-2 max-w-2xl text-slate">
         Phones, laptops, spares, accessories, gadgets and more — prices in
         Naira, delivery across Nigeria.
       </p>
 
-      <div className="mt-6 flex max-w-2xl" role="search">
+      <div className="mt-6 flex max-w-2xl gap-2" role="search">
         <label htmlFor="shop-search" className="sr-only">
           Search products
         </label>
@@ -56,9 +56,9 @@ function ShopContent() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search products… e.g. iPhone, charger, laptop"
-          className="min-w-0 flex-1 border-2 border-ink bg-surface px-4 py-3 text-sm outline-none placeholder:text-steel focus:border-signal"
+          className="min-w-0 flex-1 rounded-full border border-line bg-surface px-5 py-3 text-sm outline-none placeholder:text-slate focus:border-ink focus:ring-2 focus:ring-ink/10"
         />
-        <span className="border-2 border-l-0 border-ink bg-ink px-4 py-3 font-mono text-sm font-bold text-white">
+        <span className="rounded-full bg-surface px-4 py-3 text-sm font-semibold text-slate shadow-sm ring-1 ring-line">
           {filtered.length} found
         </span>
       </div>
@@ -70,10 +70,10 @@ function ShopContent() {
             type="button"
             onClick={() => setCategory(cat)}
             aria-pressed={category === cat}
-            className={`border-2 px-4 py-2 text-sm font-bold ${
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
               category === cat
-                ? "border-ink bg-ink text-white"
-                : "border-ink bg-surface text-ink hover:border-signal hover:text-signal"
+                ? "bg-ink text-white"
+                : "border border-line bg-surface text-ink hover:border-ink"
             }`}
           >
             {cat}
@@ -82,18 +82,18 @@ function ShopContent() {
       </div>
 
       {loading ? (
-        <p className="mt-10 text-steel">Loading products…</p>
+        <p className="mt-10 text-slate">Loading products…</p>
       ) : filtered.length === 0 ? (
-        <p className="mt-10 border-2 border-ink bg-surface p-6 text-center text-steel">
+        <p className="mt-10 rounded-2xl border border-line bg-surface p-8 text-center text-slate shadow-sm">
           No products match that search. Try a different word or category.
         </p>
       ) : (
         <>
-          <p className="mt-6 font-mono text-sm text-steel">
+          <p className="mt-8 text-sm text-slate">
             {filtered.length} product{filtered.length === 1 ? "" : "s"}
             {category !== "All" ? ` · ${category}` : ""}
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filtered.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
@@ -106,7 +106,7 @@ function ShopContent() {
 
 export default function ShopPage() {
   return (
-    <Suspense fallback={<p className="p-10 text-steel">Loading shop…</p>}>
+    <Suspense fallback={<p className="p-10 text-slate">Loading shop…</p>}>
       <ShopContent />
     </Suspense>
   );

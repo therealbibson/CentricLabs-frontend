@@ -18,8 +18,8 @@ const NAV = [
  * when there is no admin token in localStorage.
  *
  * Admin is a working tool, not a marketing page: same tokens, restrained
- * art direction — white panels, 2px borders, signal only for the active
- * section and primary actions.
+ * art direction — white panels, hairline borders, pill navigation, ink
+ * only for the active section and primary actions.
  */
 export default function AdminShell({
   title,
@@ -41,20 +41,20 @@ export default function AdminShell({
   }, [router]);
 
   if (!ready) {
-    return <p className="mx-auto max-w-6xl p-10 text-steel">Checking admin login…</p>;
+    return <p className="mx-auto max-w-6xl p-10 text-slate">Checking admin login…</p>;
   }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="font-mono text-sm text-steel">CentricLabs admin</p>
-          <h1 className="mt-1 font-display text-3xl font-black tracking-tight">{title}</h1>
+          <p className="text-sm text-slate">CentricLabs admin</p>
+          <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight">{title}</h1>
         </div>
         <div className="flex gap-2">
           <Link
             href="/shop"
-            className="border-2 border-ink bg-surface px-4 py-2 text-sm font-bold hover:border-signal hover:text-signal"
+            className="rounded-lg border border-line bg-surface px-4 py-2 text-sm font-semibold hover:border-ink"
           >
             View store
           </Link>
@@ -64,7 +64,7 @@ export default function AdminShell({
               clearAdminToken();
               router.replace("/admin/login");
             }}
-            className="bg-ink px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-signal"
+            className="rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-ink/90"
           >
             Log out
           </button>
@@ -77,10 +77,10 @@ export default function AdminShell({
             key={item.href}
             href={item.href}
             aria-current={pathname === item.href ? "page" : undefined}
-            className={`border-2 px-4 py-2 text-sm font-bold ${
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
               pathname === item.href
-                ? "border-ink bg-ink text-white"
-                : "border-ink bg-surface text-steel hover:text-ink"
+                ? "bg-ink text-white"
+                : "border border-line bg-surface text-slate hover:text-ink"
             }`}
           >
             {item.label}

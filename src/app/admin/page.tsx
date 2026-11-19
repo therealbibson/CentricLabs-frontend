@@ -17,11 +17,11 @@ export default function AdminDashboardPage() {
  return (
  <AdminShell title="Admin dashboard">
  {error && (
- <p className="border-2 border-ink bg-surface p-4 font-bold text-signal">
+ <p className="rounded-xl bg-red-50 p-4 font-semibold text-red-700">
  {error}
  </p>
  )}
- {!stats && !error && <p className="text-steel">Loading dashboard…</p>}
+ {!stats && !error && <p className="text-slate">Loading dashboard…</p>}
  {stats && (
  <>
  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -34,29 +34,29 @@ export default function AdminDashboardPage() {
  <Link
  key={card.label}
  href={card.href}
- className="border-2 border-ink bg-surface p-5 hover:border-signal"
+ className="rounded-2xl border border-line bg-surface p-5 shadow-sm transition-shadow hover:shadow-md"
  >
- <p className="font-mono text-sm text-steel">
+ <p className="text-sm text-slate">
  {card.label}
  </p>
- <p className="mt-2 font-display text-3xl font-black">{card.value}</p>
+ <p className="mt-2 font-display text-3xl font-extrabold">{card.value}</p>
  </Link>
  ))}
  </div>
 
- <div className="mt-8 grid gap-8 lg:grid-cols-2">
- <section className="border-2 border-ink bg-surface p-5">
- <h2 className="font-black">Low stock — 5 or fewer left</h2>
+ <div className="mt-8 grid gap-6 lg:grid-cols-2">
+ <section className="rounded-2xl border border-line bg-surface p-6 shadow-sm">
+ <h2 className="font-extrabold">Low stock — 5 or fewer left</h2>
  {stats.lowStock.length === 0 ? (
- <p className="mt-3 text-sm text-steel">Nothing low on stock.</p>
+ <p className="mt-3 text-sm text-slate">Nothing low on stock.</p>
  ) : (
  <ul className="mt-3 space-y-2 text-sm">
  {stats.lowStock.map((p) => (
  <li key={p.id} className="flex justify-between gap-3">
- <Link href="/admin/products" className="font-semibold hover:text-signal">
+ <Link href="/admin/products" className="font-semibold hover:underline">
  {p.name}
  </Link>
- <span className="font-black text-signal">
+ <span className="font-bold text-copper">
  {p.stock} left · {formatNGN(p.price)}
  </span>
  </li>
@@ -65,10 +65,10 @@ export default function AdminDashboardPage() {
  )}
  </section>
 
- <section className="border-2 border-ink bg-surface p-5">
- <h2 className="font-black">Recent orders</h2>
+ <section className="rounded-2xl border border-line bg-surface p-6 shadow-sm">
+ <h2 className="font-extrabold">Recent orders</h2>
  {stats.recentOrders.length === 0 ? (
- <p className="mt-3 text-sm text-steel">
+ <p className="mt-3 text-sm text-slate">
  No orders yet — orders from the checkout will show here.
  </p>
  ) : (
@@ -76,14 +76,14 @@ export default function AdminDashboardPage() {
  {stats.recentOrders.map((o) => (
  <li key={o.id} className="flex justify-between gap-3">
  <span>
- <span className="font-bold">{o.id}</span> · {o.customer.name}
+ <span className="font-semibold">{o.id}</span> · {o.customer.name}
  </span>
- <span className="font-black">{formatNGN(o.total)}</span>
+ <span className="font-bold">{formatNGN(o.total)}</span>
  </li>
  ))}
  </ul>
  )}
- <Link href="/admin/orders" className="mt-4 inline-block text-sm font-bold text-signal hover:underline">
+ <Link href="/admin/orders" className="mt-4 inline-block text-sm font-semibold text-ink hover:underline">
  View all orders
  </Link>
  </section>

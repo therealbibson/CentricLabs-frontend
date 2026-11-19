@@ -5,8 +5,8 @@ import AdminShell from "@/components/AdminShell";
 import { fetchAdminQuotes, updateQuoteStatus, type AdminQuote } from "@/lib/admin";
 
 const STATUS_STYLE: Record<AdminQuote["status"], string> = {
- new: "border-2 border-ink bg-surface text-ink",
- contacted: "bg-signal text-white",
+ new: "bg-mist text-slate",
+ contacted: "bg-copper text-white",
  done: "bg-ink text-white",
 };
 
@@ -37,44 +37,44 @@ export default function AdminQuotesPage() {
  return (
  <AdminShell title="Quote requests">
  {error && (
- <p className="mb-4 border-2 border-ink bg-surface p-4 font-bold text-signal">
+ <p className="mb-4 rounded-xl bg-red-50 p-4 font-semibold text-red-700">
  {error}
  </p>
  )}
  {loading ? (
- <p className="text-steel">Loading quote requests…</p>
+ <p className="text-slate">Loading quote requests…</p>
  ) : quotes.length === 0 ? (
- <p className="border-2 border-ink bg-surface p-6 text-steel">
+ <p className="rounded-2xl border border-line bg-surface p-6 text-slate shadow-sm">
  No quote requests yet — requests from the Services page will appear
  here.
  </p>
  ) : (
  <div className="space-y-4">
  {quotes.map((q) => (
- <article key={q.id} className="border-2 border-ink bg-surface p-5">
+ <article key={q.id} className="rounded-2xl border border-line bg-surface p-5 shadow-sm">
  <div className="flex flex-wrap items-center justify-between gap-3">
  <div>
- <p className="font-black">{q.id}</p>
- <p className="text-sm text-steel">
+ <p className="font-extrabold">{q.id}</p>
+ <p className="text-sm text-slate">
  {q.name} · {q.phone}
  {q.email ? ` · ${q.email}` : ""} ·{" "}
  {new Date(q.createdAt).toLocaleString("en-NG")}
  </p>
  </div>
- <span className={`px-3 py-1 text-xs font-black ${STATUS_STYLE[q.status]}`}>
+ <span className={`rounded-full px-3 py-1 text-xs font-bold ${STATUS_STYLE[q.status]}`}>
  {q.status}
  </span>
  </div>
  <p className="mt-3 text-sm leading-6">
  <strong>Service:</strong> {q.serviceId}
  </p>
- <p className="mt-1 text-sm leading-6 text-steel">{q.details}</p>
+ <p className="mt-1 text-sm leading-6 text-slate">{q.details}</p>
  <div className="mt-4 flex flex-wrap gap-2">
  <button
  type="button"
  onClick={() => void changeStatus(q, "contacted")}
  disabled={q.status !== "new"}
- className="bg-signal px-4 py-2 text-sm font-bold text-white hover:bg-signal-deep disabled:opacity-40"
+ className="rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-ink/90 disabled:opacity-40"
  >
  Mark as contacted
  </button>
@@ -82,7 +82,7 @@ export default function AdminQuotesPage() {
  type="button"
  onClick={() => void changeStatus(q, "done")}
  disabled={q.status === "done"}
- className="bg-ink px-4 py-2 text-sm font-bold text-white hover:bg-signal disabled:opacity-40"
+ className="rounded-lg border border-line bg-surface px-4 py-2 text-sm font-semibold transition hover:border-ink disabled:opacity-40"
  >
  Mark as done
  </button>

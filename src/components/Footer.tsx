@@ -2,19 +2,17 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-16 bg-ink text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-3 sm:px-6">
+    <footer className="mt-20 bg-ink text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-3 sm:px-6">
         <div>
-          <p className="font-display text-xl font-black tracking-tight">
+          <p className="font-display text-xl font-extrabold tracking-tight">
             CentricLabs
           </p>
           <p className="mt-3 max-w-xs text-sm leading-6 text-white/70">
             Software, IT consulting and gadgets — built and supplied from
             Lagos, Nigeria, for customers across Nigeria and beyond.
           </p>
-          <p className="mt-4 font-mono text-xs text-white/50">
-            Lagos · Nigeria
-          </p>
+          <p className="mt-4 text-xs text-white/50">Lagos · Nigeria</p>
         </div>
         <div>
           <p className="font-display text-base font-bold">Shop and services</p>
@@ -47,7 +45,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 py-4 text-center font-mono text-xs text-white/50">
+      <div className="border-t border-white/10 py-4 text-center text-xs text-white/50">
         © 2026 CentricLabs · Usman Abeeb · Lagos, Nigeria
       </div>
     </footer>

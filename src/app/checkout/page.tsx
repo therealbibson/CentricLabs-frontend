@@ -55,7 +55,7 @@ export default function CheckoutPage() {
 
   if (status === "done") {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6">
+      <div className="mx-auto max-w-2xl animate-fade-in px-4 py-16 text-center sm:px-6">
         <h1 className="font-display text-3xl font-extrabold">Order placed</h1>
         <p className="mt-3 leading-7 text-slate">
           Thanks, {name}. Your order reference is{" "}

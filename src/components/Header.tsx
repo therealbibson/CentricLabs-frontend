@@ -58,7 +58,10 @@ export default function Header() {
             className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition hover:bg-ink/90"
           >
             Cart{" "}
-            <span className="rounded-full bg-white/15 px-1.5 py-0.5 text-xs">
+            <span
+              key={count}
+              className="inline-block animate-pop rounded-full bg-white/15 px-1.5 py-0.5 text-xs"
+            >
               {count}
             </span>
           </Link>

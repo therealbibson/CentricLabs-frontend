@@ -6,7 +6,13 @@ import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { formatNGN, type Product } from "@/lib/api";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  delay = 0,
+}: {
+  product: Product;
+  delay?: number;
+}) {
   const { add } = useCart();
   const [added, setAdded] = useState(false);
 
@@ -17,14 +23,17 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-sm transition-shadow hover:shadow-lg">
+    <article
+      style={{ animationDelay: `${delay}ms` }}
+      className="group flex animate-fade-in flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+    >
       <Link href={`/shop/${product.id}`} className="relative block bg-mist">
         <Image
           src={product.image}
           alt={product.name}
           width={800}
           height={600}
-          className="aspect-[4/3] w-full object-cover"
+          className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           loading="lazy"
         />
         {product.badge && (
@@ -71,7 +80,7 @@ export default function ProductCard({ product }: { product: Product }) {
           type="button"
           onClick={handleAdd}
           disabled={product.stock === 0}
-          className="mt-4 rounded-lg bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-ink/90 disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-4 rounded-lg bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-ink/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
         >
           {added ? "Added to cart" : "Add to cart"}
         </button>

@@ -82,7 +82,22 @@ function ShopContent() {
       </div>
 
       {loading ? (
-        <p className="mt-10 text-slate">Loading products…</p>
+        <div
+          className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          aria-label="Loading products"
+        >
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className="animate-pulse rounded-2xl border border-line bg-surface p-5 shadow-sm"
+            >
+              <div className="aspect-[4/3] rounded-xl bg-mist" />
+              <div className="mt-4 h-4 w-2/3 rounded bg-mist" />
+              <div className="mt-2 h-4 w-1/2 rounded bg-mist" />
+              <div className="mt-4 h-10 rounded-lg bg-mist" />
+            </div>
+          ))}
+        </div>
       ) : filtered.length === 0 ? (
         <p className="mt-10 rounded-2xl border border-line bg-surface p-8 text-center text-slate shadow-sm">
           No products match that search. Try a different word or category.
@@ -94,8 +109,8 @@ function ShopContent() {
             {category !== "All" ? ` · ${category}` : ""}
           </p>
           <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filtered.map((p) => (
-              <ProductCard key={p.id} product={p} />
+            {filtered.map((p, i) => (
+              <ProductCard key={p.id} product={p} delay={Math.min(i, 7) * 40} />
             ))}
           </div>
         </>

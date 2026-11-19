@@ -40,7 +40,7 @@ export default function Home() {
     <div>
       {/* Hero — a calm white panel: copy and search left, one product right. */}
       <section className="px-4 pt-6 sm:px-6">
-        <div className="mx-auto grid max-w-6xl gap-10 rounded-3xl border border-line bg-surface px-6 py-12 shadow-sm sm:px-10 lg:grid-cols-12 lg:px-14 lg:py-16">
+        <div className="mx-auto grid max-w-6xl animate-fade-up gap-10 rounded-3xl border border-line bg-surface px-6 py-12 shadow-sm sm:px-10 lg:grid-cols-12 lg:px-14 lg:py-16">
           <div className="lg:col-span-7">
             <p className="text-sm font-semibold text-copper">
               Phones, laptops and spares — Lagos, Nigeria
@@ -175,8 +175,8 @@ export default function Home() {
           <p className="mt-4 text-slate">Loading products…</p>
         ) : (
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featured.map((p) => (
-              <ProductCard key={p.id} product={p} />
+            {featured.map((p, i) => (
+              <ProductCard key={p.id} product={p} delay={i * 60} />
             ))}
           </div>
         )}

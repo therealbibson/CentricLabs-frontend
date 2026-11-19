@@ -27,6 +27,50 @@
   --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Motion — a little, only where it helps (Tailwind v4 @theme form, so
+     the production build keeps the keyframes: plain-CSS @keyframes get
+     dropped by the production minifier). Entrance is one soft fade-up
+     for the hero and a staggered fade for product cards (opacity only,
+     so it never fights the card hover lift). The cart badge pops when
+     the count changes, so adding to cart gets visible confirmation,
+     and success panels fade in. Buttons press down slightly.
+     Everything else stays still. Reduced motion removes all of it. */
+  --animate-fade-up: fade-up 0.45s ease-out both;
+  --animate-fade-in: fade-in 0.4s ease-out both;
+  --animate-pop: pop 0.3s ease-out;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.35);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 }
 
 body {
@@ -40,8 +84,7 @@ body {
   outline-offset: 2px;
 }
 
-/* One purposeful motion only: a soft shadow on product cards. Reduced
-   motion removes even that. */
+/* Reduced motion removes every transition and animation. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

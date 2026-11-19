@@ -102,7 +102,7 @@ export default function ServicesPage() {
         </p>
 
         {status === "done" ? (
-          <div className="mt-6 rounded-2xl bg-mist p-6">
+          <div className="mt-6 animate-fade-in rounded-2xl bg-mist p-6">
             <p className="font-display text-lg font-extrabold">Request received</p>
             <p className="mt-2 text-sm leading-6">
               Thanks, {name}. Your quote reference is{" "}

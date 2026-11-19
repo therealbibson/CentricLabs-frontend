@@ -17,8 +17,8 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border border-line bg-cream shadow-sm transition hover:shadow-md">
-      <Link href={`/shop/${product.id}`} className="relative block">
+    <article className="flex flex-col border-2 border-ink bg-surface">
+      <Link href={`/shop/${product.id}`} className="relative block border-b-2 border-ink">
         <Image
           src={product.image}
           alt={product.name}
@@ -28,41 +28,45 @@ export default function ProductCard({ product }: { product: Product }) {
           loading="lazy"
         />
         {product.badge && (
-          <span className="absolute left-3 top-3 rounded-full bg-amber px-3 py-1 text-xs font-black text-ink">
+          <span className="absolute left-3 top-3 bg-signal px-2.5 py-1 font-mono text-xs font-bold text-white">
             {product.badge}
           </span>
         )}
       </Link>
       <div className="flex flex-1 flex-col p-4">
-        <p className="text-xs font-bold uppercase tracking-wider text-flame">
-          {product.category}
-        </p>
+        <p className="font-mono text-xs text-steel">{product.category}</p>
         <Link href={`/shop/${product.id}`}>
-          <h3 className="mt-1 font-bold leading-snug hover:text-flame">
+          <h3 className="mt-1 font-display text-lg font-bold leading-snug hover:text-signal">
             {product.name}
           </h3>
         </Link>
-        <p className="mt-1 line-clamp-2 text-sm text-ink-soft">
+        <p className="mt-1 line-clamp-2 text-sm leading-6 text-steel">
           {product.description}
         </p>
-        <div className="mt-3 flex items-baseline gap-2">
-          <span className="text-lg font-black">{formatNGN(product.price)}</span>
+        <div className="mt-3 flex flex-wrap items-baseline gap-2">
+          <span className="price-ticket">{formatNGN(product.price)}</span>
           {product.oldPrice && (
-            <span className="text-sm text-ink-soft line-through">
+            <span className="font-mono text-sm text-steel line-through">
               {formatNGN(product.oldPrice)}
             </span>
           )}
         </div>
-        <p className="mt-1 text-xs text-ink-soft">
+        <p className="mt-2 font-mono text-xs text-steel">
+          <span
+            aria-hidden="true"
+            className={`mr-1.5 inline-block h-2 w-2 ${
+              product.stock > 0 ? "bg-signal" : "bg-steel"
+            }`}
+          />
           {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
         </p>
         <button
           type="button"
           onClick={handleAdd}
           disabled={product.stock === 0}
-          className="mt-4 rounded-full bg-flame px-4 py-2.5 text-sm font-bold text-white transition hover:bg-flame-dark disabled:cursor-not-allowed disabled:opacity-40"
+          className="mt-4 bg-ink px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-signal disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {added ? "Added ✓" : "Add to cart"}
+          {added ? "Added to cart" : "Add to cart"}
         </button>
       </div>
     </article>

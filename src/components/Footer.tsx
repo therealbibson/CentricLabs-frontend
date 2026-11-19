@@ -5,18 +5,19 @@ export default function Footer() {
     <footer className="mt-16 bg-ink text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-3 sm:px-6">
         <div>
-          <p className="text-xl font-black tracking-tight">
-            Centric<span className="text-flame">Labs</span>
+          <p className="font-display text-xl font-black tracking-tight">
+            CentricLabs
           </p>
           <p className="mt-3 max-w-xs text-sm leading-6 text-white/70">
             Software, IT consulting and gadgets — built and supplied from
             Lagos, Nigeria, for customers across Nigeria and beyond.
           </p>
+          <p className="mt-4 font-mono text-xs text-white/50">
+            Lagos · Nigeria
+          </p>
         </div>
         <div>
-          <p className="text-sm font-bold uppercase tracking-wider text-amber">
-            Shop &amp; Services
-          </p>
+          <p className="font-display text-base font-bold">Shop and services</p>
           <ul className="mt-3 space-y-2 text-sm text-white/80">
             <li>
               <Link className="hover:text-white" href="/shop">All products</Link>
@@ -28,14 +29,12 @@ export default function Footer() {
               <Link className="hover:text-white" href="/services">IT consulting</Link>
             </li>
             <li>
-              <Link className="hover:text-white" href="/services">Web &amp; mobile apps</Link>
+              <Link className="hover:text-white" href="/services">Web and mobile apps</Link>
             </li>
           </ul>
         </div>
         <div>
-          <p className="text-sm font-bold uppercase tracking-wider text-amber">
-            Contact
-          </p>
+          <p className="font-display text-base font-bold">Contact</p>
           <ul className="mt-3 space-y-2 text-sm text-white/80">
             <li>Lagos, Nigeria</li>
             <li>
@@ -48,7 +47,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 py-4 text-center text-xs text-white/50">
+      <div className="border-t border-white/10 py-4 text-center font-mono text-xs text-white/50">
         © 2026 CentricLabs · Usman Abeeb · Lagos, Nigeria
       </div>
     </footer>

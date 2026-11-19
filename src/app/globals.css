@@ -2,26 +2,67 @@
 
 /*
  * CentricLabs design tokens — Tailwind v4 theme.
- * All styling in the app uses these tokens (bg-paper, text-ink,
- * bg-flame, bg-amber, border-line, ...) — no ad-hoc hex colours in
- * components, and no deep teal anywhere. Warm paper, ink black,
- * vivid orange accent, amber secondary.
+ *
+ * PASS 1 (Claude frontend-design skill): the old system — warm cream
+ * #FAF6EF, ink, vivid orange, amber — read as the generic "warm cream +
+ * terracotta" template. Revised: the field is now a cool spec-sheet grey
+ * (#EDEDE7), amber is gone entirely, and orange survives only as ONE
+ * signal colour (#FF4D00) — Lagos market-signage / hardware hazard orange
+ * — spent on price, stock and the primary action, nowhere else. Borders
+ * are 2px ink, corners are square, cards are flat: a spec sheet and a
+ * market stall, not a SaaS card kit.
  */
 @theme {
-  --color-paper: #faf6ef;
-  --color-cream: #fffdf8;
-  --color-ink: #161513;
-  --color-ink-soft: #5b554d;
-  --color-flame: #ff5a1f;
-  --color-flame-dark: #e04a12;
-  --color-amber: #ffb627;
-  --color-amber-soft: #ffe9b8;
-  --color-line: #e8dfd2;
-  --color-sage: #eef0e6;
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --color-base: #edede7;
+  --color-surface: #ffffff;
+  --color-ink: #17150f;
+  --color-steel: #60645c;
+  --color-signal: #ff4d00;
+  --color-signal-deep: #d63e00;
+  --color-line: #d5d4c8;
+  --font-display: var(--font-manrope), "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 body {
-  background: var(--color-paper);
+  background: var(--color-base);
   color: var(--color-ink);
+}
+
+/* Visible keyboard focus everywhere — 2px signal outline. */
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
+
+/* The Price Ticket: the signature element. A mono price on a solid
+   signal block with a notched corner. Used on cards, product detail,
+   cart and checkout — price is the one thing that must read instantly. */
+.price-ticket {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  background: var(--color-signal);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0.3rem 0.65rem;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+
+.price-ticket--ink {
+  background: var(--color-ink);
+}
+
+/* One purposeful motion only: primary buttons change colour. Everything
+   else is instant. Reduced motion removes even that. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
 }

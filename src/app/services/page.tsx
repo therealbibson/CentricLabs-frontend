@@ -36,12 +36,17 @@ export default function ServicesPage() {
   }
 
   const inputCls =
-    "w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm outline-none focus:border-flame";
+    "w-full border-2 border-ink bg-surface px-4 py-3 text-sm outline-none placeholder:text-steel focus:border-signal";
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="text-3xl font-black tracking-tight sm:text-4xl">Services</h1>
-      <p className="mt-2 max-w-2xl text-ink-soft">
+      <p className="font-mono text-sm text-steel">
+        Software development · IT consulting · Web and mobile apps
+      </p>
+      <h1 className="mt-2 font-display text-4xl font-black tracking-tight sm:text-5xl">
+        Services
+      </h1>
+      <p className="mt-3 max-w-2xl leading-7 text-steel">
         Software development, IT consulting, web and mobile applications —
         built by Usman Abeeb and CentricLabs, from Lagos for clients
         everywhere. Tell us what you need and we will send a quote within 1
@@ -49,22 +54,28 @@ export default function ServicesPage() {
       </p>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
-        {services.map((s) => (
+        {services.map((s, i) => (
           <article
             key={s.id}
-            className="rounded-2xl border border-line bg-cream p-6 shadow-sm"
+            className="border-2 border-ink bg-surface p-6"
           >
-            <h2 className="text-xl font-black">{s.name}</h2>
-            <p className="mt-1 font-bold text-flame">{s.tagline}</p>
-            <p className="mt-3 text-sm leading-6 text-ink-soft">{s.description}</p>
+            <p className="font-mono text-sm font-bold text-signal">
+              {String(i + 1).padStart(2, "0")}
+            </p>
+            <h2 className="mt-2 font-display text-2xl font-black">{s.name}</h2>
+            <p className="mt-1 font-bold text-steel">{s.tagline}</p>
+            <p className="mt-3 text-sm leading-6 text-steel">{s.description}</p>
             <ul className="mt-4 space-y-1.5 text-sm">
               {s.features.map((f) => (
-                <li key={f}>✓ {f}</li>
+                <li key={f} className="flex gap-2">
+                  <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 bg-signal" />
+                  {f}
+                </li>
               ))}
             </ul>
-            <p className="mt-4 font-black">
+            <p className="mt-4 font-mono font-bold">
               From {formatNGN(s.startingFrom)}
-              <span className="ml-2 text-sm font-normal text-ink-soft">
+              <span className="ml-2 font-sans text-sm font-normal text-steel">
                 — final price depends on scope
               </span>
             </p>
@@ -74,7 +85,7 @@ export default function ServicesPage() {
                 setServiceId(s.id);
                 document.getElementById("quote-form")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="mt-4 rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-white hover:bg-flame"
+              className="mt-4 bg-ink px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-signal"
             >
               Request a quote for this service
             </button>
@@ -84,21 +95,21 @@ export default function ServicesPage() {
 
       <section
         id="quote-form"
-        className="mt-12 rounded-2xl border border-line bg-cream p-6 sm:p-8"
+        className="mt-12 border-2 border-ink bg-surface p-6 sm:p-8"
       >
-        <h2 className="text-2xl font-black">Request a quote</h2>
-        <p className="mt-1 text-sm text-ink-soft">
+        <h2 className="font-display text-2xl font-black">Request a quote</h2>
+        <p className="mt-1 text-sm text-steel">
           No payment needed — this just sends your project details to
           CentricLabs.
         </p>
 
         {status === "done" ? (
-          <div className="mt-6 rounded-2xl bg-amber-soft p-6">
-            <p className="text-lg font-black">Request received ✓</p>
+          <div className="mt-6 border-2 border-ink bg-base p-6">
+            <p className="font-display text-lg font-black">Request received</p>
             <p className="mt-2 text-sm leading-6">
               Thanks, {name}. Your quote reference is{" "}
-              <span className="font-bold">{ref}</span>. CentricLabs will
-              contact you on {phone} within 1 business day.
+              <span className="font-mono font-bold text-signal">{ref}</span>.
+              CentricLabs will contact you on {phone} within 1 business day.
             </p>
           </div>
         ) : (
@@ -159,14 +170,14 @@ export default function ServicesPage() {
               />
             </label>
             {status === "error" && (
-              <p className="text-sm font-bold text-flame sm:col-span-2">
+              <p className="text-sm font-bold text-signal sm:col-span-2">
                 {error} Is the backend running? (http://localhost:4000)
               </p>
             )}
             <button
               type="submit"
               disabled={status === "sending"}
-              className="rounded-full bg-flame px-6 py-3 font-bold text-white hover:bg-flame-dark disabled:opacity-50 sm:col-span-2"
+              className="bg-signal px-6 py-3 font-bold text-white transition-colors hover:bg-signal-deep disabled:opacity-50 sm:col-span-2"
             >
               {status === "sending" ? "Sending…" : "Send quote request"}
             </button>
